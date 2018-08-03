@@ -2,6 +2,13 @@
 
 ## AspNet Core SignalR 微信小程序客户端
 
+### 效果演示
+![](/img/1.gif)
+![](/img/2.gif)
+
+
+<img src="https://raw.githubusercontent.com/liangshiw/SignalRMiniProgram-Client/master/img/1.jpg" width="250" height="500" />
+<img src="https://raw.githubusercontent.com/liangshiw/SignalRMiniProgram-Client/master/img/2.png" width="250" height="500" />
 ### Get Started
 
 #### 创建对象
