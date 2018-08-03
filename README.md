@@ -13,7 +13,11 @@ let hub  = new HubConnection();
 #### 开启连接
 
 ``` JavaScript
-hub.start(url,token);
+hub.start(url,queryString);
+例如
+hub.start(url,{
+    access_token:"bearer token"
+});
 ```
 
 #### 事件

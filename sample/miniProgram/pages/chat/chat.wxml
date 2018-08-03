@@ -1,0 +1,32 @@
+<view class='news'>
+  <view class='xiahuaxian1 xiahuaxia'></view>
+  <view class="historycon">
+    <scroll-view scroll-y="true" scroll-top="{{scrollTop}}" class="history" wx:for="{{centendata}}" wx:key=''>
+      <view>
+        <text class='time'>{{item.time}}</text>
+      </view>
+      <block wx:if="{{item.is_show_right ==1}}">
+        <view class='my_right'>
+          <view class='page_row'>
+            <text class='new_txt'>{{item.content}}</text>
+            <image class='new_img'  src='{{item.head_owner}}'></image>
+          </view>
+        </view>
+      </block>
+      <block wx:else>
+        <view class='you_left'>
+          <view class='page_row'>
+            <image class='new_img' src='{{item.head_owner}}'></image>
+            <text class='new_txt'>{{item.content}}</text>
+          </view>
+        </view>
+      </block>
+    </scroll-view>
+  </view>
+</view>
+<view class='hei' id="hei"></view>
+<view class="sendmessage">
+  <input type="emoji" bindinput="bindChange" confirm-type="done" value='{{news_input_val}}' placeholder="" />
+  <button catchtap="add">发送</button>
+  <input style='display:none' type="" bindinput="bindChange" confirm-type="done" placeholder="" />
+</view>

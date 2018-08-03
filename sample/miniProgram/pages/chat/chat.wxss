@@ -1,0 +1,153 @@
+/* pages/index/to_news/to_news.wxss */
+ 
+page {
+  background-color: #f7f7f7;
+}
+ 
+.tab {
+  padding: 20rpx 20rpx 40rpx 50rpx;
+  height: 20%;
+  background-color: white;
+}
+ 
+.tab .tent {
+  font-size: 33rpx;
+  margin-bottom: 30rpx;
+}
+
+.tab .fabu {
+  font-size: 33rpx;
+  margin-top: 30rpx;
+  margin-bottom: 30rpx;
+}
+ 
+.xiahuaxia {
+  width: 80%;
+  text-align: center;
+  margin: 0 auto;
+  position: relative;
+  top: 60rpx;
+}
+ 
+.time {
+  text-align: center;
+  padding: 5rpx 20rpx 5rpx 20rpx;
+  width: 200rpx;
+  font-size: 26rpx;
+  background-color: #E8E8E8;
+}
+ 
+.new_top_txt {
+  width: 50%;
+  position: relative;
+  top: 38rpx;
+  text-align: center;
+  margin: 0 auto;
+  font-size: 30rpx;
+  color: #787878;
+  background-color: #f7f7f7;
+}
+ 
+/* 聊天内容 */
+ 
+.news {
+  margin-top: 30rpx;
+  text-align: center;
+  margin-bottom: 150rpx;
+}
+ 
+.img_null {
+  height: 60rpx;
+}
+ 
+.l {
+  height: 5rpx;
+  width: 20%;
+  margin-top: 30rpx;
+  color: #000;
+}
+ 
+/* 聊天 */
+ 
+.my_right {
+  float: right;
+  position: relative;
+  right: 40rpx;
+}
+ 
+.you_left {
+  float: left;
+  position: relative;
+  left: 5rpx;
+}
+ 
+.new_img {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+}
+ 
+.new_txt {
+  width: 380rpx;
+  border-radius: 7px;
+  background-color: #95d4ff;
+  padding: 0rpx 30rpx 0rpx 30rpx;
+}
+ 
+.my {
+  border-color: transparent transparent transparent #95d4ff;
+}
+ 
+.you {
+  border-color: transparent #95d4ff transparent transparent;
+}
+ 
+.sendmessage {
+  background-color: white;
+  width: 100%;
+  position: fixed;
+  bottom: 0rpx;
+  display: flex;
+  flex-direction: row;
+}
+ 
+.sendmessage input {
+  width: 80%;
+  height: 40px;
+  background-color: white;
+  line-height: 40px;
+  font-size: 14px;
+  border: 1px solid #d0d0d0;
+  padding-left: 10px;
+}
+ 
+.sendmessage button {
+  border: 1px solid white;
+  width: 20%;
+  height: 40px;
+  background: #fff;
+  color: #000;
+  line-height: 40px;
+  font-size: 14px;
+}
+ 
+.historycon {
+  height: 90%;
+  width: 100%;
+  flex-direction: column;
+  display: flex;
+  margin-top: 100rpx;
+  border-top: 0px;
+}
+.hei{
+  margin-top: 50px;
+  height: 20rpx;
+}
+.history {
+  height: 100%;
+  margin-top: 15px;
+  margin: 10px;
+  font-size: 14px;
+  line-height: 40px;
+  word-break: break-all;
+}
