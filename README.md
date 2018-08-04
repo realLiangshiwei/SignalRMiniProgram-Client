@@ -1,3 +1,5 @@
+博客园博文地址 https://www.cnblogs.com/LiangSW/p/9415246.html
+
 # SignalRMiniProgram
 
 ## AspNet Core SignalR 微信小程序客户端
