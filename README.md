@@ -39,13 +39,16 @@ hub.onOpen = (res)={
 
 //连接关闭事件
 hub.onClose = (res)={
-    console.log("连接已开启")
+    console.log("连接已关闭")
 };
 
 //通讯过程中的Error事件
 hub.onError = (res) =>{
     console.log(res)
 };
+
+//手动关闭连接
+hub.close({reason:"手动关闭"});
 ```
 
 #### 调用服务端方法(无返回值)
