@@ -140,7 +140,7 @@ export class HubConnection {
     if(data.data.length>3){
       data.data = data.data.replace('{}', "")
     }
-    var messages = data.data.spilt("");
+    var messages = data.data.split("");
     for(var message of messages){
        if(message.trim()!=""){
           var messagejson = JSON.parse(message);
