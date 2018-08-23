@@ -140,36 +140,37 @@ export class HubConnection {
     if(data.data.length>3){
       data.data = data.data.replace('{}', "")
     }
-  
-    var message = JSON.parse(data.data.replace(new RegExp("", "gm"),""));
-
-    switch (message.type) {
-      case MessageType.Invocation:
-        this.invokeClientMethod(message);
-        break;
-      case MessageType.StreamItem:
-        break;
-      case MessageType.Completion:
-        var callback = this.callbacks[message.invocationId];
-        if (callback != null) {
-          delete this.callbacks[message.invocationId];
-          callback(message);
-        }
-        break;
-      case MessageType.Ping:
-        // Don't care about pings
-        break;
-      case MessageType.Close:
-        console.log("Close message received from server.");
-        this.close({
-          reason: "Server returned an error on close"
-        });
-        break;
-      default:
-        console.warn("Invalid message type: " + message.type);
+    var messages = data.data.spilt("");
+    for(var message of messages){
+       if(message.trim()!=""){
+          var messagejson = JSON.parse(message);
+          switch (messagejson.type) {
+            case MessageType.Invocation:
+              this.invokeClientMethod(messagejson);
+              break;
+            case MessageType.StreamItem:
+              break;
+            case MessageType.Completion:
+              var callback = this.callbacks[messagejson.invocationId];
+              if (callback != null) {
+                delete this.callbacks[messagejson.invocationId];
+                callback(messagejson);
+              }
+              break;
+            case MessageType.Ping:
+              // Don't care about pings
+              break;
+            case MessageType.Close:
+              console.log("Close message received from server.");
+              this.close({
+                reason: "Server returned an error on close"
+              });
+              break;
+            default:
+              console.warn("Invalid message type: " + messagejson.type);
+          }  
+       }
     }
-
-
   }
 
 
