@@ -98,6 +98,7 @@ export class HubConnection {
 
 
   on(method, fun) {
+    method = method.toLowerCase();
     if (this.methods[method]) {
       this.methods[method].push(fun);
     } else {
