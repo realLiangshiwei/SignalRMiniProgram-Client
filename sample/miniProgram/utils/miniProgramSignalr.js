@@ -37,7 +37,7 @@ export class HubConnection {
   start(url, queryString) {
     var negotiateUrl = url + "/negotiate";
     if (queryString) {
-      for(var query in queryString){
+      for (var query in queryString) {
         negotiateUrl += (negotiateUrl.indexOf("?") < 0 ? "?" : "&") + (`${query}=` + encodeURIComponent(queryString[query]));
       }
     }
@@ -47,7 +47,7 @@ export class HubConnection {
       async: false,
       success: res => {
         this.negotiateResponse = res.data;
-        this.startSocket(negotiateUrl.replace("/negotiate",""));
+        this.startSocket(negotiateUrl.replace("/negotiate", ""));
       },
       fail: res => {
         console.error(`requrst ${url} error : ${res}`);
@@ -98,14 +98,17 @@ export class HubConnection {
 
 
   on(method, fun) {
-    if (this.methods[method]) {
-      this.methods[method].push(fun);
+
+    let methodName = method.toLowerCase();
+    if (this.methods[methodName]) {
+      this.methods[methodName].push(fun);
     } else {
-      this.methods[method] = [fun];
+      this.methods[methodName] = [fun];
+
     }
   }
 
-  onOpen(data) {}
+  onOpen(data) { }
 
   onClose(msg) {
 
@@ -137,39 +140,45 @@ export class HubConnection {
 
 
   receive(data) {
-    if(data.data.length>3){
+    if (data.data.length > 3) {
       data.data = data.data.replace('{}', "")
     }
-  
-    var message = JSON.parse(data.data.replace(new RegExp("", "gm"),""));
 
-    switch (message.type) {
-      case MessageType.Invocation:
-        this.invokeClientMethod(message);
-        break;
-      case MessageType.StreamItem:
-        break;
-      case MessageType.Completion:
-        var callback = this.callbacks[message.invocationId];
-        if (callback != null) {
-          delete this.callbacks[message.invocationId];
-          callback(message);
+    var messageDataList = data.data.split("");
+
+    //循环处理服务端信息
+    for (let serverMsg of messageDataList) {
+      if (serverMsg) {
+        var messageData = serverMsg.replace(new RegExp("", "gm"), "")
+        var message = JSON.parse(messageData);
+
+        switch (message.type) {
+          case MessageType.Invocation:
+            this.invokeClientMethod(message);
+            break;
+          case MessageType.StreamItem:
+            break;
+          case MessageType.Completion:
+            var callback = this.callbacks[message.invocationId];
+            if (callback != null) {
+              delete this.callbacks[message.invocationId];
+              callback(message);
+            }
+            break;
+          case MessageType.Ping:
+            // Don't care about pings
+            break;
+          case MessageType.Close:
+            console.log("Close message received from server.");
+            this.close({
+              reason: "Server returned an error on close"
+            });
+            break;
+          default:
+            console.warn("Invalid message type: " + message.type);
         }
-        break;
-      case MessageType.Ping:
-        // Don't care about pings
-        break;
-      case MessageType.Close:
-        console.log("Close message received from server.");
-        this.close({
-          reason: "Server returned an error on close"
-        });
-        break;
-      default:
-        console.warn("Invalid message type: " + message.type);
+      }
     }
-
-
   }
 
 
