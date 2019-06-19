@@ -1,6 +1,6 @@
 参考博文地址 https://www.cnblogs.com/LiangSW/p/9415246.html
 
-SignalRMiniProgram参考地址 传送门：https://github.com/liangshiw/SignalRMiniProgram-Client
+使用案例参考sample文件下夹项目 传送门：https://github.com/liangshiw/SignalRMiniProgram-Client/tree/master/sample
 
 SignalR官方学习教程地址 https://docs.microsoft.com/zh-cn/aspnet/core/signalr/introduction?view=aspnetcore-2.2
 
