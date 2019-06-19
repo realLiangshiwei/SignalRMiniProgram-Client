@@ -98,10 +98,13 @@ export class HubConnection {
 
 
   on(method, fun) {
-    if (this.methods[method]) {
-      this.methods[method].push(fun);
+
+    let methodName=method.toLowerCase();
+    if (this.methods[methodName]) {
+      this.methods[methodName].push(fun);
     } else {
-      this.methods[method] = [fun];
+      this.methods[methodName] = [fun];
+
     }
   }
 
@@ -140,8 +143,19 @@ export class HubConnection {
     if(data.data.length>3){
       data.data = data.data.replace('{}', "")
     }
-  
-    var message = JSON.parse(data.data.replace(new RegExp("", "gm"),""));
+
+    var messageDataList=data.data.split("");
+    let firstData="";
+    if(messageDataList.length>0)
+    {
+      firstData=messageDataList[0];
+    }
+    else
+    {
+      firstData=data.data;
+    }
+    var messageData=firstData.replace(new RegExp("", "gm"),"")
+    var message = JSON.parse(messageData);
 
     switch (message.type) {
       case MessageType.Invocation:

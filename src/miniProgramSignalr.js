@@ -98,11 +98,13 @@ export class HubConnection {
 
 
   on(method, fun) {
-    method = method.toLowerCase();
-    if (this.methods[method]) {
-      this.methods[method].push(fun);
+
+    let methodName=method.toLowerCase();
+    if (this.methods[methodName]) {
+      this.methods[methodName].push(fun);
     } else {
-      this.methods[method] = [fun];
+      this.methods[methodName] = [fun];
+
     }
   }
 
@@ -141,37 +143,47 @@ export class HubConnection {
     if(data.data.length>3){
       data.data = data.data.replace('{}', "")
     }
-    var messages = data.data.split("");
-    for(var message of messages){
-       if(message.trim()!=""){
-          var messagejson = JSON.parse(message);
-          switch (messagejson.type) {
-            case MessageType.Invocation:
-              this.invokeClientMethod(messagejson);
-              break;
-            case MessageType.StreamItem:
-              break;
-            case MessageType.Completion:
-              var callback = this.callbacks[messagejson.invocationId];
-              if (callback != null) {
-                delete this.callbacks[messagejson.invocationId];
-                callback(messagejson);
-              }
-              break;
-            case MessageType.Ping:
-              // Don't care about pings
-              break;
-            case MessageType.Close:
-              console.log("Close message received from server.");
-              this.close({
-                reason: "Server returned an error on close"
-              });
-              break;
-            default:
-              console.warn("Invalid message type: " + messagejson.type);
-          }  
-       }
+
+    var messageDataList=data.data.split("");
+    let firstData="";
+    if(messageDataList.length>0)
+    {
+      firstData=messageDataList[0];
     }
+    else
+    {
+      firstData=data.data;
+    }
+    var messageData=firstData.replace(new RegExp("", "gm"),"")
+    var message = JSON.parse(messageData);
+
+    switch (message.type) {
+      case MessageType.Invocation:
+        this.invokeClientMethod(message);
+        break;
+      case MessageType.StreamItem:
+        break;
+      case MessageType.Completion:
+        var callback = this.callbacks[message.invocationId];
+        if (callback != null) {
+          delete this.callbacks[message.invocationId];
+          callback(message);
+        }
+        break;
+      case MessageType.Ping:
+        // Don't care about pings
+        break;
+      case MessageType.Close:
+        console.log("Close message received from server.");
+        this.close({
+          reason: "Server returned an error on close"
+        });
+        break;
+      default:
+        console.warn("Invalid message type: " + message.type);
+    }
+
+
   }
 
 
