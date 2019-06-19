@@ -2,6 +2,8 @@
 
 SignalRMiniProgram参考地址 传送门：https://github.com/liangshiw/SignalRMiniProgram-Client
 
+SignalR官方学习教程地址 https://docs.microsoft.com/zh-cn/aspnet/core/signalr/introduction?view=aspnetcore-2.2
+
 
 # 核心思路
 SignalRMiniSignalR.js帮助类库：使用微信小程序webSocket的api与后台建立socket连接，后端使用signalR组件建立hub（中心），通过hub（中心）发送信息到客户端或者接受来自于客户端的信息，传递信息大都包括要调用的函数名称，函数参数等关键信息，如果匹配到相同的名称的函数名，则执行相关的操作；
